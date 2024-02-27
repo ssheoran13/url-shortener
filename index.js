@@ -28,6 +28,9 @@ let cnt=0
 app.post('/api/shorturl', (req,res)=>{
   const dns = require('node:dns');
   let input_url=req.body.url
+  if (input_url[0]!=='h'){
+    res.json({error:'invalid url'})
+  }
   try{
     const {urlObject}=new URL(input_url)
     dns.lookup(input_url.hostname,(err)=>{
